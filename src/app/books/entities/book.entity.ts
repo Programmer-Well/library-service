@@ -14,6 +14,7 @@ export enum BookStatus {
 
 @Entity()
 export class Book {
+  [x: string]: any;
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

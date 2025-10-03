@@ -1,4 +1,3 @@
-// src/app/books/use-cases/borrow-book.use-case.ts
 
 import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import type { IBookRepository } from 'src/repositories/book.repository'; 

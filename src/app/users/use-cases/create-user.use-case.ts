@@ -1,16 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
-
 import type { IUserRepository } from 'src/repositories/user.repository';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { User } from '../entities/user.entity';
 import { ClientProxy } from '@nestjs/microservices';
 
+
 @Injectable()
 export class CreateUserUseCase {
+
   constructor(
     @Inject('IUserRepository')
     private userRepo: IUserRepository,
-    @Inject('PROJECTS_SERVICE')
+    @Inject('USERS_SERVICE')
     private client: ClientProxy
   ) { }
 
@@ -25,7 +26,6 @@ export class CreateUserUseCase {
       name: user.name,
       email: user.email,
     });
-    
-    return user;
+
   }
 }

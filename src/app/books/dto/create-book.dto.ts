@@ -1,8 +1,7 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateBookDto {
-  [x: string]: any;
-  
+
   @IsString()
     @IsNotEmpty()
     title: string;

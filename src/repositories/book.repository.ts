@@ -1,16 +1,15 @@
-// src/repositories/book.repository.ts
-
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateBookDto } from 'src/app/books/dto/update-book.dto';
 import { Book } from 'src/app/books/entities/book.entity'; 
 import { Repository } from 'typeorm';
 
-// Interface agora está explícita, sem o '[x: string]: any'
 export interface IBookRepository {
+  [x: string]: any;
   create(book: Book): Promise<void>;
-  update(book: Book): Promise<void>; // <-- ADICIONADO AQUI
   findById(id: string): Promise<Book | null>;
   findAll(): Promise<Book[]>;
+  update(book: Book): Promise<void>;
   remove(id: string): Promise<void>;
 }
 
@@ -21,14 +20,11 @@ export class BookTypeOrmRepository implements IBookRepository {
     private typeOrmRepo: Repository<Book>,
   ) {}
   
-  async create(book: Book): Promise<void> {
+  async update(book: Book): Promise<void> {
     await this.typeOrmRepo.save(book);
   }
-
-  // <-- IMPLEMENTAÇÃO DO MÉTODO UPDATE ADICIONADA
-  async update(book: Book): Promise<void> {
-    // O método 'save' do TypeORM funciona como 'upsert':
-    // se a entidade tem um ID, ele a atualiza; se não, ele a insere.
+  
+  async create(book: Book): Promise<void> {
     await this.typeOrmRepo.save(book);
   }
 
